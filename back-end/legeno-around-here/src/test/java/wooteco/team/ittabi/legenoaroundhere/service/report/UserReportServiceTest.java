@@ -14,13 +14,16 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_PASSWORD;
 
 import java.io.IOException;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.multipart.MultipartFile;
+import wooteco.team.ittabi.legenoaroundhere.domain.post.image.PostImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
+import wooteco.team.ittabi.legenoaroundhere.domain.user.UserImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.mailauth.MailAuth;
 import wooteco.team.ittabi.legenoaroundhere.dto.ReportCreateRequest;
 import wooteco.team.ittabi.legenoaroundhere.dto.UserImageResponse;
@@ -31,6 +34,7 @@ import wooteco.team.ittabi.legenoaroundhere.dto.UserUpdateRequest;
 import wooteco.team.ittabi.legenoaroundhere.exception.NotExistsException;
 import wooteco.team.ittabi.legenoaroundhere.repository.MailAuthRepository;
 import wooteco.team.ittabi.legenoaroundhere.service.ServiceTest;
+import wooteco.team.ittabi.legenoaroundhere.utils.ImageUploader;
 import wooteco.team.ittabi.legenoaroundhere.utils.TestConverterUtils;
 
 class UserReportServiceTest extends ServiceTest {
@@ -43,6 +47,9 @@ class UserReportServiceTest extends ServiceTest {
     @MockBean
     private MailAuthRepository mailAuthRepository;
 
+    @MockBean
+    private ImageUploader imageUploader;
+
     private User user;
     private User another;
 
@@ -50,6 +57,18 @@ class UserReportServiceTest extends ServiceTest {
     void setUp() {
         MailAuth mailAuth = new MailAuth(TEST_USER_EMAIL, TEST_AUTH_NUMBER);
         when(mailAuthRepository.findByEmail(any())).thenReturn(java.util.Optional.of(mailAuth));
+
+        PostImage postImage = PostImage.builder()
+            .name("")
+            .url("")
+            .build();
+        UserImage userImage = UserImage.builder()
+            .name("")
+            .url("")
+            .build();
+        when(imageUploader.uploadPostImage(any())).thenReturn(postImage);
+        when(imageUploader.uploadPostImages(any())).thenReturn(Collections.singletonList(postImage));
+        when(imageUploader.uploadUserImage(any())).thenReturn(userImage);
 
         user = createUser(TEST_PREFIX + TEST_USER_EMAIL,
             TEST_USER_NICKNAME,

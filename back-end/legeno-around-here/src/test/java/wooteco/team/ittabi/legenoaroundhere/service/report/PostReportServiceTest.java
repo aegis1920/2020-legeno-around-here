@@ -27,7 +27,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
+import wooteco.team.ittabi.legenoaroundhere.domain.post.image.PostImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
+import wooteco.team.ittabi.legenoaroundhere.domain.user.UserImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.mailauth.MailAuth;
 import wooteco.team.ittabi.legenoaroundhere.dto.PostCreateRequest;
 import wooteco.team.ittabi.legenoaroundhere.dto.PostImageResponse;
@@ -40,6 +42,7 @@ import wooteco.team.ittabi.legenoaroundhere.repository.MailAuthRepository;
 import wooteco.team.ittabi.legenoaroundhere.service.PostService;
 import wooteco.team.ittabi.legenoaroundhere.service.SectorService;
 import wooteco.team.ittabi.legenoaroundhere.service.ServiceTest;
+import wooteco.team.ittabi.legenoaroundhere.utils.ImageUploader;
 import wooteco.team.ittabi.legenoaroundhere.utils.TestConverterUtils;
 
 public class PostReportServiceTest extends ServiceTest {
@@ -58,6 +61,9 @@ public class PostReportServiceTest extends ServiceTest {
     @MockBean
     private MailAuthRepository mailAuthRepository;
 
+    @MockBean
+    private ImageUploader imageUploader;
+
     private User user;
     private Long postId;
     private Long sectorId;
@@ -71,6 +77,18 @@ public class PostReportServiceTest extends ServiceTest {
             TEST_USER_NICKNAME,
             TEST_USER_PASSWORD);
         setAuthentication(user);
+
+        PostImage postImage = PostImage.builder()
+            .name("")
+            .url("")
+            .build();
+        UserImage userImage = UserImage.builder()
+            .name("")
+            .url("")
+            .build();
+        when(imageUploader.uploadPostImage(any())).thenReturn(postImage);
+        when(imageUploader.uploadPostImages(any())).thenReturn(Collections.singletonList(postImage));
+        when(imageUploader.uploadUserImage(any())).thenReturn(userImage);
 
         SectorResponse sector = sectorService.createSector(TEST_SECTOR_REQUEST);
         sectorId = sector.getId();
