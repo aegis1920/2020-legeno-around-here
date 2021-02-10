@@ -94,13 +94,13 @@ public class PostService {
         User user = (User) authenticationFacade.getPrincipal();
 
         Page<Post> posts = getPostByFilter(pageable, postSearchFilter.toPostSearch());
-
+        System.out.println();
         return posts.map(post -> PostWithCommentsCountResponse.of(user, post));
     }
 
     private Page<Post> getPostByFilter(Pageable pageable, PostSearch postSearch) {
         if (postSearch.isNotExistsFilter()) {
-            return postRepository.findAllBy(pageable);
+            return postRepository.findAll(pageable);
         }
 
         if (postSearch.isAreaFilter()) {

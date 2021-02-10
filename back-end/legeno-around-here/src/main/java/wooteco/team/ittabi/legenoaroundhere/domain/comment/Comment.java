@@ -63,7 +63,7 @@ public class Comment extends BaseEntity {
     @OneToMany(mappedBy = "superComment")
     private List<Comment> cocomments = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id")
     private User creator;
 

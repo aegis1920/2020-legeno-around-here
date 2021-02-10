@@ -25,6 +25,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.transaction.annotation.Transactional;
 import wooteco.team.ittabi.legenoaroundhere.domain.comment.Comment;
 import wooteco.team.ittabi.legenoaroundhere.domain.notification.Notification;
 import wooteco.team.ittabi.legenoaroundhere.domain.post.Post;
@@ -115,6 +116,7 @@ public class CommentServiceTest extends ServiceTest {
             .isInstanceOf(NotExistsException.class);
     }
 
+    @Transactional
     @DisplayName("댓글 생성시 글 작성자에게 알림 발송")
     @Test
     void createComment_NotifyPostCommentNotification() {
@@ -140,6 +142,7 @@ public class CommentServiceTest extends ServiceTest {
         assertThat(notification.getIsRead()).isFalse();
     }
 
+    @Transactional
     @DisplayName("댓글 생성시 기존 알림이 있을 경우, 글 작성자에게 새 알림 & 기존 알림 삭제")
     @Test
     void createComment_ExistsNotification_NotifyPostCommentNotification() {
@@ -217,6 +220,7 @@ public class CommentServiceTest extends ServiceTest {
             .isInstanceOf(NotAvailableException.class);
     }
 
+    @Transactional
     @DisplayName("대댓글 생성시 댓글 작성자에게 알림 발송")
     @Test
     void createCocomment_NotifyCommentCocommentNotification() {
@@ -243,6 +247,7 @@ public class CommentServiceTest extends ServiceTest {
         assertThat(notification.getIsRead()).isFalse();
     }
 
+    @Transactional
     @DisplayName("대댓글 생성시 기존 알림이 있을 경우, 댓글 작성자에게 새 알림 & 기존 알림 삭제")
     @Test
     void createCocomment_ExistsNotification_NotifyCommentCocommentNotification() {
@@ -468,6 +473,7 @@ public class CommentServiceTest extends ServiceTest {
         assertThat(zzang.isActivated()).isFalse();
     }
 
+    @Transactional
     @DisplayName("짱 활성화시 작성자에게 알림 발송")
     @Test
     void pressZzang_ActiveCommentZzang_NotifyCommentZzangNotification() {
@@ -520,6 +526,7 @@ public class CommentServiceTest extends ServiceTest {
         assertThat(notification.getId()).isEqualTo(notificationId);
     }
 
+    @Transactional
     @DisplayName("짱 활성화시 기존 알림이 있을 경우, 새 알림 & 기존 알림 삭제")
     @Test
     void pressZzang_ActivePostZzangAndExistsNotification_NotifyPostZzangNotification() {

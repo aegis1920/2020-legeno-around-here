@@ -24,6 +24,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.transaction.annotation.Transactional;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.mailauth.MailAuth;
 import wooteco.team.ittabi.legenoaroundhere.dto.AwardResponse;
@@ -113,6 +114,7 @@ class AwardServiceTest extends ServiceTest {
         postService.pressZzang(postIdA);
     }
 
+    @Transactional
     @DisplayName("월간 인기 자랑글 상 일괄 수여")
     @Test
     void createMonthlyPopularPostAwards() {

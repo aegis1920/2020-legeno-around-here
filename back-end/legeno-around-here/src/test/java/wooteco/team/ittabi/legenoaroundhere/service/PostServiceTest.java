@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import wooteco.team.ittabi.legenoaroundhere.domain.notification.Notification;
 import wooteco.team.ittabi.legenoaroundhere.domain.post.Post;
@@ -415,6 +416,7 @@ class PostServiceTest extends ServiceTest {
         assertThat(zzang.isActivated()).isFalse();
     }
 
+    @Transactional
     @DisplayName("짱 활성화시 작성자에게 알림 발송")
     @Test
     void pressZzang_ActivePostZzang_NotifyPostZzangNotification() {
@@ -468,6 +470,7 @@ class PostServiceTest extends ServiceTest {
         assertThat(notification.getId()).isEqualTo(notificationId);
     }
 
+    @Transactional
     @DisplayName("짱 활성화시 기존 알림이 있을 경우, 새 알림 & 기존 알림 삭제")
     @Test
     void pressZzang_ActivePostZzangAndExistsNotification_NotifyPostZzangNotification() {

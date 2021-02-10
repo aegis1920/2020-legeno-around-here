@@ -69,7 +69,7 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "creator", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
     private Area area = null;
 

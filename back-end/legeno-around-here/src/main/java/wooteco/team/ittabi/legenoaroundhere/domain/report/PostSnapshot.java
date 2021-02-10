@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -27,7 +26,7 @@ public class PostSnapshot {
     @Column(nullable = false)
     private String postWriting;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     @JoinColumn(name = "post_report_id", foreignKey = @ForeignKey(name = "FK_POST_REPORT_POST_IMAGE_URLS_POST_REPORT"), nullable = false)
     private List<String> postImageUrls = new ArrayList<>();
 

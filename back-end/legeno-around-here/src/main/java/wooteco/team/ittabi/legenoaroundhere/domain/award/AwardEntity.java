@@ -1,6 +1,7 @@
 package wooteco.team.ittabi.legenoaroundhere.domain.award;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -22,7 +23,7 @@ public abstract class AwardEntity extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "awardee_id", nullable = false)
     private User awardee;
 }
