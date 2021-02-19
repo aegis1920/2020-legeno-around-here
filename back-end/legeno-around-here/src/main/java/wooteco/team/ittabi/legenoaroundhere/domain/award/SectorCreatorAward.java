@@ -3,6 +3,7 @@ package wooteco.team.ittabi.legenoaroundhere.domain.award;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -24,12 +25,12 @@ import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
 @SQLDelete(sql = "UPDATE sector_creator_award SET deleted_at = NOW() WHERE id = ?")
 @Where(clause = "deleted_at IS NULL")
 @Table(indexes = {
-    @Index(name="idx_sector_creator_award_awardee", columnList = "awardee_id"),
-    @Index(name="idx_sector_creator_award_sector", columnList = "sector_id")
+    @Index(name = "idx_sector_creator_award_awardee", columnList = "awardee_id"),
+    @Index(name = "idx_sector_creator_award_sector", columnList = "sector_id")
 })
 public class SectorCreatorAward extends AwardEntity {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sector_id", nullable = false)
     private Sector sector;
 

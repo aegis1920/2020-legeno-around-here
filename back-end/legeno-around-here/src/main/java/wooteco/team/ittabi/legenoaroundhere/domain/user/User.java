@@ -60,7 +60,7 @@ public class User extends BaseEntity implements UserDetails {
     private List<String> roles
         = new ArrayList<>(Collections.singletonList(Role.USER.getRoleName()));
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private UserImage image = null;
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.PERSIST, orphanRemoval = true)
