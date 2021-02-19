@@ -94,7 +94,6 @@ public class PostService {
         User user = (User) authenticationFacade.getPrincipal();
 
         Page<Post> posts = getPostByFilter(pageable, postSearchFilter.toPostSearch());
-        System.out.println();
         return posts.map(post -> PostWithCommentsCountResponse.of(user, post));
     }
 
