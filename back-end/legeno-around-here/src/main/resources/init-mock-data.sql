@@ -62,6 +62,16 @@ VALUES (1, '탕수육 먹었서요', 'PUBLISHED', 1, 1, 2, now(), now()),
        (7, '진짜 빨리 먹었서요', 'PUBLISHED', 1, 2, 2, now(), now()),
        (8, '카트 잘해여', 'PUBLISHED', 1, 3, 2, now(), now());
 
+INSERT INTO Comment(id, post_id, writing, state, creator_id, created_at, modified_at)
+VALUES (1, 1, '첫 번째 댓글입니다', 'PUBLISHED', 3, now(), now()),
+        (2, 1, '두 번째 댓글입니다', 'PUBLISHED', 3, now(), now()),
+        (3, 1, '세 번째 댓글입니다', 'PUBLISHED', 1, now(), now()),
+        (4, 2, '네 번째 댓글입니다', 'PUBLISHED', 2, now(), now()),
+        (5, 2, '다섯 번째 댓글입니다', 'PUBLISHED', 3, now(), now()),
+        (6, 3, '여섯 번째 댓글입니다', 'PUBLISHED', 2, now(), now()),
+        (7, 3, '일곱 번째 댓글입니다', 'PUBLISHED', 3, now(), now());
+
+
 INSERT INTO Post_Image(id, name, url, post_id, created_at, modified_at)
 VALUES (1, '탕수육 사진1',
         'https://legeno-around-here.s3.ap-northeast-2.amazonaws.com/posts/images/mock/t1.jpeg', 1,
