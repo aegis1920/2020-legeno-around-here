@@ -30,6 +30,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 import wooteco.team.ittabi.legenoaroundhere.domain.award.SectorCreatorAward;
 import wooteco.team.ittabi.legenoaroundhere.domain.notification.Notification;
 import wooteco.team.ittabi.legenoaroundhere.domain.sector.SectorState;
@@ -328,6 +329,7 @@ class SectorServiceTest extends ServiceTest {
         assertThat(sector.getReason()).isEqualTo(TEST_SECTOR_REASON);
     }
 
+    @Transactional
     @DisplayName("SectorState 업데이트 - 수상, Approve로 변경")
     @Test
     void updateSectorState_TurnApproved_giveASectorCreatorAward() {

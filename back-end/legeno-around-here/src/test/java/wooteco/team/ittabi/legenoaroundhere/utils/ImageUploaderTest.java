@@ -13,17 +13,20 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_NICKNAME;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_PASSWORD;
 
+import io.findify.s3mock.S3Mock;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.multipart.MultipartFile;
+import wooteco.team.ittabi.legenoaroundhere.config.auth.S3MockConfig;
 import wooteco.team.ittabi.legenoaroundhere.domain.post.image.PostImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.UserImage;
@@ -33,8 +36,11 @@ import wooteco.team.ittabi.legenoaroundhere.exception.WrongUserInputException;
 import wooteco.team.ittabi.legenoaroundhere.repository.MailAuthRepository;
 import wooteco.team.ittabi.legenoaroundhere.service.ServiceTest;
 
-@Disabled
+@Import(S3MockConfig.class)
 class ImageUploaderTest extends ServiceTest {
+
+    @Autowired
+    private S3Mock s3Mock;
 
     @MockBean
     private MailAuthRepository mailAuthRepository;
@@ -49,6 +55,11 @@ class ImageUploaderTest extends ServiceTest {
 
         User user = createUser("image_" + TEST_USER_EMAIL, TEST_USER_NICKNAME, TEST_USER_PASSWORD);
         setAuthentication(user);
+    }
+
+    @AfterEach
+    void tearDown() {
+        s3Mock.stop();
     }
 
     @DisplayName("포스트 이미지들 업로드 - 성공")
