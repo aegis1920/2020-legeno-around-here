@@ -39,11 +39,11 @@ import wooteco.team.ittabi.legenoaroundhere.service.ServiceTest;
 @Import(S3MockConfig.class)
 class ImageUploaderTest extends ServiceTest {
 
-    @Autowired
-    private S3Mock s3Mock;
-
     @MockBean
     private MailAuthRepository mailAuthRepository;
+
+    @Autowired
+    private S3Mock s3Mock;
 
     @Autowired
     private ImageUploader imageUploader;

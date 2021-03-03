@@ -20,24 +20,26 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_OTHER_EMAIL;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_PASSWORD;
 
+import io.findify.s3mock.S3Mock;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import wooteco.team.ittabi.legenoaroundhere.config.auth.S3MockConfig;
 import wooteco.team.ittabi.legenoaroundhere.domain.notification.Notification;
 import wooteco.team.ittabi.legenoaroundhere.domain.post.Post;
-import wooteco.team.ittabi.legenoaroundhere.domain.post.image.PostImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
-import wooteco.team.ittabi.legenoaroundhere.domain.user.UserImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.mailauth.MailAuth;
 import wooteco.team.ittabi.legenoaroundhere.dto.PostCreateRequest;
 import wooteco.team.ittabi.legenoaroundhere.dto.PostImageResponse;
@@ -53,12 +55,15 @@ import wooteco.team.ittabi.legenoaroundhere.exception.NotExistsException;
 import wooteco.team.ittabi.legenoaroundhere.repository.MailAuthRepository;
 import wooteco.team.ittabi.legenoaroundhere.repository.NotificationRepository;
 import wooteco.team.ittabi.legenoaroundhere.repository.PostRepository;
-import wooteco.team.ittabi.legenoaroundhere.utils.ImageUploader;
 import wooteco.team.ittabi.legenoaroundhere.utils.TestConverterUtils;
 
+@Import(S3MockConfig.class)
 class PostServiceTest extends ServiceTest {
 
     private static final String TEST_PREFIX = "post_";
+
+    @Autowired
+    private S3Mock s3Mock;
 
     @Autowired
     private PostService postService;
@@ -75,9 +80,6 @@ class PostServiceTest extends ServiceTest {
     @MockBean
     private MailAuthRepository mailAuthRepository;
 
-    @MockBean
-    private ImageUploader imageUploader;
-
     private User user;
     private User another;
     private SectorResponse sector;
@@ -88,17 +90,6 @@ class PostServiceTest extends ServiceTest {
     void setUp() {
         MailAuth mailAuth = new MailAuth(TEST_USER_EMAIL, TEST_AUTH_NUMBER);
         when(mailAuthRepository.findByEmail(any())).thenReturn(java.util.Optional.of(mailAuth));
-        PostImage postImage = PostImage.builder()
-            .name("")
-            .url("")
-            .build();
-        UserImage userImage = UserImage.builder()
-            .name("")
-            .url("")
-            .build();
-        when(imageUploader.uploadPostImage(any())).thenReturn(postImage);
-        when(imageUploader.uploadPostImages(any())).thenReturn(Collections.singletonList(postImage));
-        when(imageUploader.uploadUserImage(any())).thenReturn(userImage);
 
         user = createUser(TEST_PREFIX + TEST_USER_EMAIL,
             TEST_USER_NICKNAME,
@@ -111,6 +102,11 @@ class PostServiceTest extends ServiceTest {
         sector = sectorService.createSector(TEST_SECTOR_REQUEST);
         sectorId = sector.getId();
         sectorOtherId = sectorService.createSector(TEST_SECTOR_ANOTHER_REQUEST).getId();
+    }
+
+    @AfterEach
+    void tearDown() {
+        s3Mock.stop();
     }
 
     @DisplayName("이미지를 포함하지 않는 포스트 생성 - 성공")
@@ -138,8 +134,7 @@ class PostServiceTest extends ServiceTest {
         final List<PostImageResponse> postImageResponses = postService
             .uploadPostImages(Arrays.asList(multipartFile1, multipartFile2));
 
-        // TODO: 2/9/21 원래는 2, 현재는 Mocking해서 1
-        assertThat(postImageResponses).hasSize(1);
+        assertThat(postImageResponses).hasSize(2);
     }
 
     @DisplayName("이미지를 포함한 포스트 생성 - 성공")

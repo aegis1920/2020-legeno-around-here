@@ -4,7 +4,6 @@ import static io.restassured.config.EncoderConfig.encoderConfig;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.AreaConstants.TEST_AREA_ID;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.AreaConstants.TEST_AUTH_NUMBER;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.ImageConstants.TEST_IMAGE_DIR;
@@ -25,53 +24,47 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_OTHER_PASSWORD;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_PASSWORD;
 
+import io.findify.s3mock.S3Mock;
 import io.restassured.RestAssured;
 import io.restassured.config.RestAssuredConfig;
 import java.io.File;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import wooteco.team.ittabi.legenoaroundhere.domain.post.image.PostImage;
-import wooteco.team.ittabi.legenoaroundhere.domain.user.UserImage;
+import wooteco.team.ittabi.legenoaroundhere.config.auth.S3MockConfig;
 import wooteco.team.ittabi.legenoaroundhere.dto.TokenResponse;
 import wooteco.team.ittabi.legenoaroundhere.dto.UserImageResponse;
 import wooteco.team.ittabi.legenoaroundhere.dto.UserOtherResponse;
 import wooteco.team.ittabi.legenoaroundhere.dto.UserResponse;
 import wooteco.team.ittabi.legenoaroundhere.service.MailAuthService;
-import wooteco.team.ittabi.legenoaroundhere.utils.ImageUploader;
 
+@Import(S3MockConfig.class)
 class UserAcceptanceTest extends AcceptanceTest {
 
     private static final String USER_LOCATION_FORMAT = "^/users/[1-9][0-9]*$";
     private static final int TOKEN_MIN_SIZE = 1;
-
+    @Autowired
+    private S3Mock s3Mock;
     @MockBean
     private MailAuthService mailAuthService;
-
-    @MockBean
-    private ImageUploader imageUploader;
 
     @BeforeEach
     void setUp() {
         RestAssured.port = port;
-        PostImage postImage = PostImage.builder()
-            .name("")
-            .url("")
-            .build();
-        UserImage userImage = UserImage.builder()
-            .name("")
-            .url("")
-            .build();
-        when(imageUploader.uploadPostImage(any())).thenReturn(postImage);
-        when(imageUploader.uploadPostImages(any())).thenReturn(Collections.singletonList(postImage));
-        when(imageUploader.uploadUserImage(any())).thenReturn(userImage);
+    }
+
+    @AfterEach
+    void tearDown() {
+        s3Mock.stop();
     }
 
     /**

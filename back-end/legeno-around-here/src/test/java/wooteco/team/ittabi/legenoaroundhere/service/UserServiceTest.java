@@ -19,23 +19,24 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_OTHER_PASSWORD;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.UserConstants.TEST_USER_PASSWORD;
 
+import io.findify.s3mock.S3Mock;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.multipart.MultipartFile;
 import wooteco.team.ittabi.legenoaroundhere.config.IAuthenticationFacade;
+import wooteco.team.ittabi.legenoaroundhere.config.auth.S3MockConfig;
 import wooteco.team.ittabi.legenoaroundhere.domain.notification.Notification;
-import wooteco.team.ittabi.legenoaroundhere.domain.post.image.PostImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.AuthProvider;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.Email;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.Role;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
-import wooteco.team.ittabi.legenoaroundhere.domain.user.UserImage;
 import wooteco.team.ittabi.legenoaroundhere.domain.user.mailauth.MailAuth;
 import wooteco.team.ittabi.legenoaroundhere.dto.LoginRequest;
 import wooteco.team.ittabi.legenoaroundhere.dto.TokenResponse;
@@ -54,14 +55,17 @@ import wooteco.team.ittabi.legenoaroundhere.exception.WrongUserInputException;
 import wooteco.team.ittabi.legenoaroundhere.repository.MailAuthRepository;
 import wooteco.team.ittabi.legenoaroundhere.repository.NotificationRepository;
 import wooteco.team.ittabi.legenoaroundhere.repository.UserRepository;
-import wooteco.team.ittabi.legenoaroundhere.utils.ImageUploader;
 import wooteco.team.ittabi.legenoaroundhere.utils.TestConverterUtils;
 
+@Import(S3MockConfig.class)
 class UserServiceTest extends ServiceTest {
 
     private static final String TEST_PREFIX = "user_";
     private static final String NOT_EXIST_PREFIX = "not_exist_";
     private static final int TOKEN_MIN_SIZE = 1;
+
+    @Autowired
+    private S3Mock s3Mock;
 
     @Autowired
     private UserService userService;
@@ -78,31 +82,20 @@ class UserServiceTest extends ServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    @MockBean
-    private ImageUploader imageUploader;
-
     @BeforeEach
     void setUp() {
         MailAuth mailAuth = new MailAuth(TEST_USER_EMAIL, TEST_AUTH_NUMBER);
         when(mailAuthRepository.findByEmail(any())).thenReturn(java.util.Optional.of(mailAuth));
 
-        PostImage postImage = PostImage.builder()
-            .name("")
-            .url("")
-            .build();
-        UserImage userImage = UserImage.builder()
-            .name("")
-            .url("")
-            .build();
-        when(imageUploader.uploadPostImage(any())).thenReturn(postImage);
-        when(imageUploader.uploadPostImages(any())).thenReturn(Collections.singletonList(postImage));
-        when(imageUploader.uploadUserImage(any())).thenReturn(userImage);
-
-
         User user = createUser(TEST_PREFIX + TEST_USER_EMAIL,
             TEST_USER_NICKNAME,
             TEST_USER_PASSWORD);
         setAuthentication(user);
+    }
+
+    @AfterEach
+    void tearDown() {
+        s3Mock.stop();
     }
 
     @DisplayName("가입 여부 확인 - 가입되지 않은 메일일 경우")
