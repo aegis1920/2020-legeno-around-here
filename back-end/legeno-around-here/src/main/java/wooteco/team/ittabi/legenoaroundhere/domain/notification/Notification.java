@@ -27,9 +27,9 @@ import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @ToString
-@SQLDelete(sql = "UPDATE notification SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
-@Table(indexes = @Index(columnList = "receiver_id", name="idx_notification_receiver"))
+@SQLDelete(sql = "UPDATE notification SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
+@Table(indexes = @Index(columnList = "receiver_id", name = "idx_notification_receiver"))
 public class Notification extends BaseEntity {
 
     @Column(nullable = false)

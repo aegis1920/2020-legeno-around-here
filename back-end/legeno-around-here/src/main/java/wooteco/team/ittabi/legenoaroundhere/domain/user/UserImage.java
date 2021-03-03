@@ -21,8 +21,8 @@ import wooteco.team.ittabi.legenoaroundhere.exception.NotAvailableException;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString(exclude = "user")
-@SQLDelete(sql = "UPDATE user_image SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE user_image SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public class UserImage extends BaseEntity {
 
     @Column(nullable = false)

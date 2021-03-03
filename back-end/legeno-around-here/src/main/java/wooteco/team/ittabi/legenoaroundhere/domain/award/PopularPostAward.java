@@ -22,8 +22,8 @@ import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString
-@SQLDelete(sql = "UPDATE popular_post_award SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE popular_post_award SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 @Table(indexes = @Index(name = "idx_popular_post_award_awardee", columnList = "awardee_id"))
 public class PopularPostAward extends AwardEntity {
 

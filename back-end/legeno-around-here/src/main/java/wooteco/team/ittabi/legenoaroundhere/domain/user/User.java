@@ -42,8 +42,8 @@ import wooteco.team.ittabi.legenoaroundhere.domain.post.Post;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString(exclude = {"posts", "comments"})
-@SQLDelete(sql = "UPDATE user SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE user SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 @Table(indexes = @Index(name = "idx_user_email", columnList = "email"))
 public class User extends BaseEntity implements UserDetails {
 

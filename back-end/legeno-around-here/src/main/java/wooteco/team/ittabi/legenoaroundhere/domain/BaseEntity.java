@@ -1,6 +1,6 @@
 package wooteco.team.ittabi.legenoaroundhere.domain;
 
-import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,5 +25,6 @@ public abstract class BaseEntity extends DateTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime deletedAt;
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private Boolean deleted = false;
 }

@@ -18,8 +18,8 @@ import wooteco.team.ittabi.legenoaroundhere.domain.BaseEntity;
 @AllArgsConstructor
 @Getter
 @ToString
-@SQLDelete(sql = "UPDATE area SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE area SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public class Area extends BaseEntity {
 
     @Column(nullable = false)

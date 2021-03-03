@@ -37,8 +37,8 @@ import wooteco.team.ittabi.legenoaroundhere.exception.WrongUserInputException;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString(exclude = {"post", "superComment", "cocomments", "zzangs", "notifications"})
-@SQLDelete(sql = "UPDATE comment SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE comment SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 @Table(indexes = @Index(name = "idx_comment_post", columnList = "post_id"))
 public class Comment extends BaseEntity {
 

@@ -24,8 +24,8 @@ import wooteco.team.ittabi.legenoaroundhere.domain.post.Post;
 @Getter
 @Setter
 @ToString(exclude = "post")
-@SQLDelete(sql = "UPDATE post_image SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE post_image SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public class PostImage extends BaseEntity {
 
     @Column(nullable = false)

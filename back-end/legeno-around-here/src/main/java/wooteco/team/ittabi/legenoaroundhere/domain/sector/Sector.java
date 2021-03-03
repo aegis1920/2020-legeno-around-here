@@ -32,8 +32,8 @@ import wooteco.team.ittabi.legenoaroundhere.domain.user.User;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString(exclude = {"posts", "notifications"})
-@SQLDelete(sql = "UPDATE sector SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE sector SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 @Table(indexes = {
     @Index(name = "idx_sector_name", columnList = "name"),
     @Index(name = "idx_sector_creator", columnList = "creator_id")

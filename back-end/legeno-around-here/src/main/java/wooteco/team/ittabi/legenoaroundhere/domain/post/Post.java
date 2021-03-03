@@ -40,18 +40,17 @@ import wooteco.team.ittabi.legenoaroundhere.exception.WrongUserInputException;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString(exclude = {"comments", "postImages", "zzangs", "notifications"})
-@SQLDelete(sql = "UPDATE post SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLDelete(sql = "UPDATE post SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 @Table(indexes = {
     @Index(name = "idx_post_creator", columnList = "creator_id"),
-    @Index(name = "idx_post_deleted_at_area", columnList = "deletedAt,area_id"),
-    @Index(name = "idx_post_deleted_at_sector", columnList = "deletedAt,sector_id")
+    @Index(name = "idx_post_deleted_area", columnList = "deleted,area_id"),
+    @Index(name = "idx_post_deleted_sector", columnList = "deleted,sector_id")
 })
 public class Post extends BaseEntity {
 
-    private static final int MAX_LENGTH = 2000;
     protected static final int ZERO = 0;
-
+    private static final int MAX_LENGTH = 2000;
     @Lob
     @Column(nullable = false)
     private String writing;
