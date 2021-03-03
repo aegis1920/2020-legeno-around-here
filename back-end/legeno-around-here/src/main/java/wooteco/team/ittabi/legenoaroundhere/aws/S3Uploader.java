@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Objects;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +17,7 @@ import wooteco.team.ittabi.legenoaroundhere.exception.FileIOException;
 import wooteco.team.ittabi.legenoaroundhere.exception.MultipartFileConvertException;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class S3Uploader {
 
@@ -46,7 +46,8 @@ public class S3Uploader {
         if (convertFile.createNewFile()) {
             return createFile(multipartFile, convertFile);
         }
-        throw new MultipartFileConvertException(originalFileName + "파일이 MultipartFile -> File로 전환이 실패했습니다.");
+        throw new MultipartFileConvertException(
+            originalFileName + "파일이 MultipartFile -> File로 전환이 실패했습니다.");
     }
 
     private File createFile(MultipartFile multipartFile, File convertFile) throws IOException {

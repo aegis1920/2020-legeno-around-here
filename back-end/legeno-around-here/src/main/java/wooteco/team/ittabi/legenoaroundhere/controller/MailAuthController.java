@@ -2,7 +2,7 @@ package wooteco.team.ittabi.legenoaroundhere.controller;
 
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.MAIL_AUTH_PATH;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +15,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.MailAuthService;
 
 @RestController
 @RequestMapping(MAIL_AUTH_PATH)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MailAuthController {
 
     private final MailAuthService mailAuthService;

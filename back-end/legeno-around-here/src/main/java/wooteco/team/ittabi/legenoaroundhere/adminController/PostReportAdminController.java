@@ -3,7 +3,7 @@ package wooteco.team.ittabi.legenoaroundhere.adminController;
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ADMIN_PATH;
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POST_REPORTS_PATH;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +18,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.report.PostReportService;
 
 @RestController
 @RequestMapping(ADMIN_PATH + POST_REPORTS_PATH)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PostReportAdminController {
 
     private final PostReportService postReportService;

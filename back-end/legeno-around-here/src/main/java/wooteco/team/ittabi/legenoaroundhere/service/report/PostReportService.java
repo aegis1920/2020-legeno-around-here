@@ -1,6 +1,6 @@
 package wooteco.team.ittabi.legenoaroundhere.service.report;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import wooteco.team.ittabi.legenoaroundhere.repository.PostReportRepository;
 import wooteco.team.ittabi.legenoaroundhere.repository.PostRepository;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PostReportService {
 
     private final PostReportRepository postReportRepository;

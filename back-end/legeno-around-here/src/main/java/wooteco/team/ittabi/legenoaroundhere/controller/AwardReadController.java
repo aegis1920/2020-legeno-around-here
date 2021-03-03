@@ -6,7 +6,7 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ME_PAT
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USERS_PATH_WITH_SLASH;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,7 @@ import wooteco.team.ittabi.legenoaroundhere.dto.AwardResponse;
 import wooteco.team.ittabi.legenoaroundhere.service.award.AwardService;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AwardReadController {
 
     private final AwardService awardService;

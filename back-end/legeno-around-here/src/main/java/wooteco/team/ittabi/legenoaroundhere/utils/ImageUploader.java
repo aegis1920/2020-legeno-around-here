@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.xml.bind.DatatypeConverter;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ import wooteco.team.ittabi.legenoaroundhere.exception.NotImageMimeTypeException;
 import wooteco.team.ittabi.legenoaroundhere.exception.WrongUserInputException;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class ImageUploader {
 
@@ -104,7 +104,8 @@ public class ImageUploader {
                     multipartFile.getName() + " 파일은 이미지 MIME 타입이 아닙니다!");
             }
         } catch (IOException e) {
-            throw new FileIOException(multipartFile.getOriginalFilename() + "의 바이트 파일을 가져오는데 실패했습니다!");
+            throw new FileIOException(
+                multipartFile.getOriginalFilename() + "의 바이트 파일을 가져오는데 실패했습니다!");
         }
     }
 

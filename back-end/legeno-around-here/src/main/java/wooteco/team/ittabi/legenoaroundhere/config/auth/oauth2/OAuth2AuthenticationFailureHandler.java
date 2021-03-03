@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import wooteco.team.ittabi.legenoaroundhere.config.auth.util.CookieUtils;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     private static final String HTTPS_CAPZZANG_CO_KR = "https://capzzang.co.kr";

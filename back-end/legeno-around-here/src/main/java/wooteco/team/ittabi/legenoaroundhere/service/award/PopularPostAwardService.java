@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +29,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.RankingService;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 class PopularPostAwardService {
 
     private static final int RANKING_LIMIT = 3;    // 3등까지 수상

@@ -1,6 +1,6 @@
 package wooteco.team.ittabi.legenoaroundhere.service.report;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wooteco.team.ittabi.legenoaroundhere.config.IAuthenticationFacade;
@@ -15,7 +15,7 @@ import wooteco.team.ittabi.legenoaroundhere.repository.CommentReportRepository;
 import wooteco.team.ittabi.legenoaroundhere.repository.CommentRepository;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CommentReportService {
 
     private final CommentReportRepository commentReportRepository;

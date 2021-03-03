@@ -3,7 +3,7 @@ package wooteco.team.ittabi.legenoaroundhere.service.award;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import wooteco.team.ittabi.legenoaroundhere.config.IAuthenticationFacade;
@@ -13,7 +13,7 @@ import wooteco.team.ittabi.legenoaroundhere.dto.AwardResponse;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AwardService {
 
     private final IAuthenticationFacade authenticationFacade;

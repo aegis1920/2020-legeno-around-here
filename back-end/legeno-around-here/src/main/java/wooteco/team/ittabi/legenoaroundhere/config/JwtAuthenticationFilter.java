@@ -7,12 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.filter.GenericFilterBean;
 import wooteco.team.ittabi.legenoaroundhere.infra.JwtTokenDecoder;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
     private static final String REQUEST_TOKEN_HEADER_NAME = "X-AUTH-TOKEN";

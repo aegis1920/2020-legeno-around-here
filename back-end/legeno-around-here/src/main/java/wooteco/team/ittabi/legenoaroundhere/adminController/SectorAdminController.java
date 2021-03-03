@@ -5,7 +5,7 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTOR
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTORS_PATH_WITH_SLASH;
 
 import java.net.URI;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +26,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.SectorService;
 
 @RestController
 @RequestMapping(ADMIN_PATH + SECTORS_PATH)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SectorAdminController {
 
     private final SectorService sectorService;

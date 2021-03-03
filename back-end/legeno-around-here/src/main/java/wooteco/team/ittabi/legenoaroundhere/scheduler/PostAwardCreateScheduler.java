@@ -1,14 +1,14 @@
 package wooteco.team.ittabi.legenoaroundhere.scheduler;
 
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import wooteco.team.ittabi.legenoaroundhere.service.award.AwardService;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Component
 public class PostAwardCreateScheduler {
 

@@ -2,7 +2,7 @@ package wooteco.team.ittabi.legenoaroundhere.controller;
 
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.RANKING_PATH;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.RankingService;
 
 @RestController
 @RequestMapping(RANKING_PATH)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RankingController {
 
     private final RankingService rankingService;

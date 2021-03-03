@@ -2,7 +2,7 @@ package wooteco.team.ittabi.legenoaroundhere.service;
 
 import java.util.Collections;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import wooteco.team.ittabi.legenoaroundhere.dto.AreaResponse;
 import wooteco.team.ittabi.legenoaroundhere.repository.AreaRepository;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AreaService {
 
     private static final String DB_LIKE_FORMAT = "%%%s%%";

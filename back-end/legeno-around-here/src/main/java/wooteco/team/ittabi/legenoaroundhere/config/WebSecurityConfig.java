@@ -1,7 +1,7 @@
 package wooteco.team.ittabi.legenoaroundhere.config;
 
 import java.util.Collections;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +27,7 @@ import wooteco.team.ittabi.legenoaroundhere.infra.JwtTokenDecoder;
 import wooteco.team.ittabi.legenoaroundhere.service.UserService;
 
 @EnableWebSecurity
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 

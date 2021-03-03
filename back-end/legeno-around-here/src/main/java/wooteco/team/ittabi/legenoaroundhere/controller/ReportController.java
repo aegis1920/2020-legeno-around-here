@@ -4,7 +4,7 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.COMMEN
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POST_REPORTS;
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USER_REPORTS;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.report.PostReportService;
 import wooteco.team.ittabi.legenoaroundhere.service.report.UserReportService;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ReportController {
 
     private final PostReportService postReportService;

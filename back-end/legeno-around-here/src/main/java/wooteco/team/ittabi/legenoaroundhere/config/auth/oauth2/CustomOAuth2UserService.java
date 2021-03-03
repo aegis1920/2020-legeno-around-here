@@ -2,7 +2,7 @@ package wooteco.team.ittabi.legenoaroundhere.config.auth.oauth2;
 
 import java.util.Map;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -21,7 +21,7 @@ import wooteco.team.ittabi.legenoaroundhere.repository.UserRepository;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;

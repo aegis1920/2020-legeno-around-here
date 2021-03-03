@@ -3,7 +3,7 @@ package wooteco.team.ittabi.legenoaroundhere.service;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import wooteco.team.ittabi.legenoaroundhere.dto.RankingRequest;
 import wooteco.team.ittabi.legenoaroundhere.repository.PostRepository;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RankingService {
 
     private final IAuthenticationFacade authenticationFacade;

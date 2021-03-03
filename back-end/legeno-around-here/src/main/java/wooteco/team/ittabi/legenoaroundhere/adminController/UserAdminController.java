@@ -2,7 +2,7 @@ package wooteco.team.ittabi.legenoaroundhere.adminController;
 
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ADMIN_PATH;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +14,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.UserService;
 
 @RestController
 @RequestMapping(ADMIN_PATH)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserAdminController {
 
     private final UserService userService;

@@ -7,7 +7,7 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ZZANGS
 
 import java.net.URI;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ import wooteco.team.ittabi.legenoaroundhere.dto.CommentResponse;
 import wooteco.team.ittabi.legenoaroundhere.service.CommentService;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CommentController {
 
     private final CommentService commentService;

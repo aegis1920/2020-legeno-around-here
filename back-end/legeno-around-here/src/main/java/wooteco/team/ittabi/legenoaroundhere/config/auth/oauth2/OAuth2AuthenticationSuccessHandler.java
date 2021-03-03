@@ -8,7 +8,7 @@ import java.util.Optional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import wooteco.team.ittabi.legenoaroundhere.config.auth.exception.BadRequestExce
 import wooteco.team.ittabi.legenoaroundhere.config.auth.util.CookieUtils;
 import wooteco.team.ittabi.legenoaroundhere.infra.JwtTokenGenerator;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 

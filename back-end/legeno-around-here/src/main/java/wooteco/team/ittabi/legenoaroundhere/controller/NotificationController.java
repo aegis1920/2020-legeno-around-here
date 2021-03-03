@@ -4,7 +4,7 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ME_PAT
 import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.NOTIFICATION_PATH;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.NotificationService;
 
 @RestController
 @RequestMapping(NOTIFICATION_PATH)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NotificationController {
 
     private final NotificationService notificationService;

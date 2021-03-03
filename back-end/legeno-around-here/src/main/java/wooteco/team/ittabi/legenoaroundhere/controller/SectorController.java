@@ -6,7 +6,7 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTOR
 
 import java.net.URI;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ import wooteco.team.ittabi.legenoaroundhere.service.SectorService;
 
 @RestController
 @RequestMapping(SECTORS_PATH)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SectorController {
 
     private final SectorService sectorService;

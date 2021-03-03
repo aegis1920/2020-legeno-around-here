@@ -9,7 +9,7 @@ import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ZZANGS
 
 import java.net.URI;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ import wooteco.team.ittabi.legenoaroundhere.dto.PostWithCommentsCountResponse;
 import wooteco.team.ittabi.legenoaroundhere.service.PostService;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Validated
 public class PostController {
 
