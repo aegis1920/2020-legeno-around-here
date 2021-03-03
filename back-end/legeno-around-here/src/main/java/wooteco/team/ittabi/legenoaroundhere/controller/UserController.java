@@ -1,11 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.controller;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.IMAGES_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.IMAGES_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ME_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USERS_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USERS_PATH_WITH_SLASH;
-
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +44,7 @@ public class UserController {
         Long userId = userService.createUser(userCreateRequest);
 
         return ResponseEntity
-            .created(URI.create(USERS_PATH_WITH_SLASH + userId))
+            .created(URI.create("/users/" + userId))
             .build();
     }
 
@@ -67,7 +61,8 @@ public class UserController {
         throw new LoginPageRedirectException();
     }
 
-    @GetMapping(USERS_PATH + ME_PATH)
+
+    @GetMapping("/users/me")
     public ResponseEntity<UserResponse> findMe() {
         UserResponse user = userService.findMe();
 
@@ -75,7 +70,7 @@ public class UserController {
             .ok(user);
     }
 
-    @GetMapping(USERS_PATH_WITH_SLASH + "{userId}")
+    @GetMapping("/users/{userId}")
     public ResponseEntity<UserOtherResponse> findUser(@PathVariable Long userId) {
         UserOtherResponse user = userService.findUser(userId);
 
@@ -83,16 +78,16 @@ public class UserController {
             .ok(user);
     }
 
-    @PostMapping(USERS_PATH + IMAGES_PATH)
+    @PostMapping("/users/images")
     public ResponseEntity<UserImageResponse> uploadUserImage(MultipartFile image) {
         UserImageResponse userImage = userService.uploadUserImage(image);
 
         return ResponseEntity
-            .created(URI.create(USERS_PATH + IMAGES_PATH_WITH_SLASH + userImage.getId()))
+            .created(URI.create("/users/images/" + userImage.getId()))
             .body(userImage);
     }
 
-    @PutMapping(USERS_PATH + ME_PATH)
+    @PutMapping("/users/me")
     public ResponseEntity<UserResponse> updateMe(@RequestBody UserUpdateRequest userUpdateRequest) {
         UserResponse user = userService.updateMe(userUpdateRequest);
 
@@ -100,7 +95,7 @@ public class UserController {
             .ok(user);
     }
 
-    @DeleteMapping(USERS_PATH + ME_PATH)
+    @DeleteMapping("/users/me")
     public ResponseEntity<Void> deactivateMe() {
         userService.deactivateMe();
 
@@ -109,7 +104,7 @@ public class UserController {
             .build();
     }
 
-    @PutMapping(USERS_PATH + ME_PATH + "/password-auth")
+    @PutMapping("/users/me/password-auth")
     public ResponseEntity<Void> changeMyPasswordWithAuth(
         @RequestBody UserPasswordWithAuthUpdateRequest userPasswordWithAuthUpdateRequest) {
         userService.changeMyPasswordWithAuth(userPasswordWithAuthUpdateRequest);
@@ -119,7 +114,7 @@ public class UserController {
             .build();
     }
 
-    @PutMapping(USERS_PATH + ME_PATH + "/password")
+    @PutMapping("/users/me/password")
     public ResponseEntity<Void> changeMyPasswordWithoutAuth(
         @RequestBody UserPasswordUpdateRequest userPasswordUpdateRequest) {
         userService.changeMyPasswordWithoutAuth(userPasswordUpdateRequest);

@@ -1,9 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.adminController;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ADMIN_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTORS_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTORS_PATH_WITH_SLASH;
-
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wooteco.team.ittabi.legenoaroundhere.dto.AdminSectorResponse;
 import wooteco.team.ittabi.legenoaroundhere.dto.PageRequest;
@@ -25,22 +20,21 @@ import wooteco.team.ittabi.legenoaroundhere.dto.SectorUpdateStateRequest;
 import wooteco.team.ittabi.legenoaroundhere.service.SectorService;
 
 @RestController
-@RequestMapping(ADMIN_PATH + SECTORS_PATH)
 @RequiredArgsConstructor
 public class SectorAdminController {
 
     private final SectorService sectorService;
 
-    @PostMapping
+    @PostMapping("/admin/sectors")
     public ResponseEntity<Void> createSector(@RequestBody SectorRequest sectorRequest) {
         SectorResponse sector = sectorService.createSector(sectorRequest);
 
         return ResponseEntity
-            .created(URI.create(SECTORS_PATH_WITH_SLASH + sector.getId()))
+            .created(URI.create("/sectors/" + sector.getId()))
             .build();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/admin/sectors/{id}")
     public ResponseEntity<AdminSectorResponse> findSector(@PathVariable Long id) {
         AdminSectorResponse sector = sectorService.findSector(id);
 
@@ -48,7 +42,7 @@ public class SectorAdminController {
             .ok(sector);
     }
 
-    @GetMapping
+    @GetMapping("/admin/sectors")
     public ResponseEntity<Page<AdminSectorResponse>> findAllSector(PageRequest pageRequest) {
         Page<AdminSectorResponse> sectors
             = sectorService.findAllSector(PageableAssembler.assemble(pageRequest));
@@ -57,7 +51,7 @@ public class SectorAdminController {
             .ok(sectors);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/sectors/{id}")
     public ResponseEntity<Void> updateSector(@PathVariable Long id,
         @RequestBody SectorRequest sectorRequest) {
         sectorService.updateSector(id, sectorRequest);
@@ -67,7 +61,7 @@ public class SectorAdminController {
             .build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/sectors/{id}")
     public ResponseEntity<Void> deleteSector(@PathVariable Long id) {
         sectorService.deleteSector(id);
 
@@ -76,7 +70,7 @@ public class SectorAdminController {
             .build();
     }
 
-    @PutMapping("/{id}/state")
+    @PutMapping("/admin/sectors/{id}/state")
     public ResponseEntity<Void> updateSectorState(@PathVariable Long id,
         @RequestBody SectorUpdateStateRequest sectorUpdateStateRequest) {
         sectorService.updateSectorState(id, sectorUpdateStateRequest);

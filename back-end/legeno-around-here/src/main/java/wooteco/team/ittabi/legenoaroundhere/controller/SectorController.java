@@ -1,9 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.controller;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ME_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTORS_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTORS_PATH_WITH_SLASH;
-
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import wooteco.team.ittabi.legenoaroundhere.dto.PageRequest;
@@ -25,13 +20,12 @@ import wooteco.team.ittabi.legenoaroundhere.dto.SectorSimpleResponse;
 import wooteco.team.ittabi.legenoaroundhere.service.SectorService;
 
 @RestController
-@RequestMapping(SECTORS_PATH)
 @RequiredArgsConstructor
 public class SectorController {
 
     private final SectorService sectorService;
 
-    @GetMapping("/{sectorId}")
+    @GetMapping("/sectors/{sectorId}")
     public ResponseEntity<SectorResponse> findAvailableSector(@PathVariable Long sectorId) {
         SectorResponse sector = sectorService.findAvailableSector(sectorId);
 
@@ -39,7 +33,7 @@ public class SectorController {
             .ok(sector);
     }
 
-    @GetMapping
+    @GetMapping("/sectors")
     public ResponseEntity<Page<SectorResponse>> searchAvailableSectors(PageRequest pageRequest,
         @RequestParam(defaultValue = "") String keyword) {
         Page<SectorResponse> sectors = sectorService
@@ -49,7 +43,7 @@ public class SectorController {
             .ok(sectors);
     }
 
-    @GetMapping("/simple")
+    @GetMapping("/sectors/simple")
     public ResponseEntity<List<SectorSimpleResponse>> findSectorsForKeywordSearch() {
         List<SectorSimpleResponse> sectors = sectorService.findAllAvailableSectors();
 
@@ -57,17 +51,17 @@ public class SectorController {
             .ok(sectors);
     }
 
-    @PostMapping
+    @PostMapping("/sectors")
     public ResponseEntity<Void> createPendingSector(@RequestBody SectorRequest sectorRequest) {
         SectorResponse sectorResponse = sectorService.createPendingSector(sectorRequest);
         Long sectorId = sectorResponse.getId();
 
         return ResponseEntity
-            .created(URI.create(SECTORS_PATH_WITH_SLASH + sectorId))
+            .created(URI.create("/sectors/" + sectorId))
             .build();
     }
 
-    @GetMapping(ME_PATH)
+    @GetMapping("/sectors/me")
     public ResponseEntity<Page<SectorDetailResponse>> findMySectors(PageRequest pageRequest) {
         Page<SectorDetailResponse> sectorDetailResponses
             = sectorService.findMySectors(PageableAssembler.assemble(pageRequest));
@@ -76,7 +70,7 @@ public class SectorController {
             .ok(sectorDetailResponses);
     }
 
-    @GetMapping("/best")
+    @GetMapping("/sectors/best")
     public ResponseEntity<List<SectorSimpleResponse>> findBestSectors(
         @RequestParam(defaultValue = "4") int count) {
         List<SectorSimpleResponse> sectors = sectorService.findBestSectors(count);

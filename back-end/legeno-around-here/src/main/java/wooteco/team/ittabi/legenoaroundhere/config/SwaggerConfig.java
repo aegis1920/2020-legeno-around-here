@@ -1,38 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.config;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.AREAS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.AREAS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.AWARDS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.AWARDS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.COMMENTS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.COMMENTS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.COMMENT_REPORTS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.COMMENT_REPORTS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.IMAGES;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.IMAGES_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.MAIL_AUTH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.MAIL_AUTH_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ME;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ME_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.NOTIFICATION;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.NOTIFICATION_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POSTS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POSTS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POST_REPORTS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POST_REPORTS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.PROFILE;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.PROFILE_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.RANKING;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.RANKING_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTORS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTORS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USERS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USERS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USER_REPORTS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USER_REPORTS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ZZANGS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ZZANGS_PATH_WITH_SLASH;
-
 import java.util.ArrayList;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,105 +23,104 @@ public class SwaggerConfig {
 
     @Bean
     public Docket areaApiDocket() {
-        groupName = AREAS;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, AREAS_PATH_WITH_SLASH));
+        groupName = "areas";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/areas/"));
     }
 
     @Bean
     public Docket awardApiDocket() {
-        groupName = AWARDS;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, AWARDS_PATH_WITH_SLASH));
+        groupName = "awards";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/awards/"));
     }
 
     @Bean
     public Docket commentApiDocket() {
-        groupName = COMMENTS;
+        groupName = "comments";
         return getDocket(groupName,
-            String.format(ALL_ANT_PATTERN_FORMAT, COMMENTS_PATH_WITH_SLASH));
+            String.format(ALL_ANT_PATTERN_FORMAT, "/comments/"));
     }
 
     @Bean
     public Docket commentReportApiDocket() {
-        groupName = COMMENT_REPORTS;
+        groupName = "comment-reports";
         return getDocket(groupName,
-            String.format(ALL_ANT_PATTERN_FORMAT, COMMENT_REPORTS_PATH_WITH_SLASH));
+            String.format(ALL_ANT_PATTERN_FORMAT, "/comment-reports/"));
     }
 
     @Bean
     public Docket imageApiDocket() {
-        groupName = IMAGES;
+        groupName = "images";
         return getDocket(groupName,
-            String.format(ALL_ANT_PATTERN_FORMAT, IMAGES_PATH_WITH_SLASH));
+            String.format(ALL_ANT_PATTERN_FORMAT, "/images/"));
     }
 
     @Bean
     public Docket mailAuthApiDocket() {
-        groupName = MAIL_AUTH;
+        groupName = "mail-auth";
         return getDocket(groupName,
-            String.format(ALL_ANT_PATTERN_FORMAT, MAIL_AUTH_PATH_WITH_SLASH));
+            String.format(ALL_ANT_PATTERN_FORMAT, "/mail-auth/"));
     }
 
     @Bean
     public Docket meApiDocket() {
-        groupName = ME;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, ME_PATH_WITH_SLASH));
+        groupName = "me";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/me/"));
     }
 
     @Bean
     public Docket noticeApiDocket() {
-        groupName = NOTIFICATION;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT,
-            NOTIFICATION_PATH_WITH_SLASH));
+        groupName = "notifications";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/notifications/"));
     }
 
     @Bean
     public Docket postApiDocket() {
-        groupName = POSTS;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, POSTS_PATH_WITH_SLASH));
+        groupName = "posts";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/posts/"));
     }
 
     @Bean
     public Docket postReportApiDocket() {
-        groupName = POST_REPORTS;
+        groupName = "post-reports";
         return getDocket(groupName,
-            String.format(ALL_ANT_PATTERN_FORMAT, POST_REPORTS_PATH_WITH_SLASH));
+            String.format(ALL_ANT_PATTERN_FORMAT, "/post-reports/"));
     }
 
     @Bean
     public Docket profileApiDocket() {
-        groupName = PROFILE;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, PROFILE_PATH_WITH_SLASH));
+        groupName = "profile";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/profile/"));
     }
 
     @Bean
     public Docket rankingApiDocket() {
-        groupName = RANKING;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, RANKING_PATH_WITH_SLASH));
+        groupName = "ranking";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/ranking/"));
     }
 
     @Bean
     public Docket sectorApiDocket() {
-        groupName = SECTORS;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, SECTORS_PATH_WITH_SLASH));
+        groupName = "sectors";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/sectors/"));
     }
 
     @Bean
     public Docket userApiDocket() {
-        groupName = USERS;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, USERS_PATH_WITH_SLASH));
+        groupName = "users";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/users/"));
     }
 
     @Bean
     public Docket userReportApiDocket() {
-        groupName = USER_REPORTS;
+        groupName = "user-reports";
         return getDocket(groupName,
-            String.format(ALL_ANT_PATTERN_FORMAT, USER_REPORTS_PATH_WITH_SLASH));
+            String.format(ALL_ANT_PATTERN_FORMAT, "/user-reports/"));
     }
 
     @Bean
     public Docket zzangApiDocket() {
-        groupName = ZZANGS;
-        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, ZZANGS_PATH_WITH_SLASH));
+        groupName = "zzangs";
+        return getDocket(groupName, String.format(ALL_ANT_PATTERN_FORMAT, "/zzangs/"));
     }
 
     @Bean

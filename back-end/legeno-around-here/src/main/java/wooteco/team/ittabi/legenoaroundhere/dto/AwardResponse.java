@@ -1,8 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.dto;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POSTS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.SECTORS_PATH_WITH_SLASH;
-
 import java.time.format.DateTimeFormatter;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -48,7 +45,7 @@ public class AwardResponse {
         return AwardResponse.builder()
             .name(popularPostAward.getName())
             .date(date)
-            .location(POSTS_PATH_WITH_SLASH + post.getId())
+            .location("/posts/" + post.getId())
             .build();
     }
 
@@ -58,7 +55,7 @@ public class AwardResponse {
         return AwardResponse.builder()
             .name(sectorCreatorAward.getName())
             .date(sectorCreatorAward.getDate().format(DATE_FORMAT_YMD))
-            .location(SECTORS_PATH_WITH_SLASH + sector.getId())
+            .location("/sectors/" + sector.getId())
             .build();
     }
 }

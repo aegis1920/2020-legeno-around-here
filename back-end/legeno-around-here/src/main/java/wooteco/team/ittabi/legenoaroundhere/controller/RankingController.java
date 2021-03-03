@@ -1,12 +1,9 @@
 package wooteco.team.ittabi.legenoaroundhere.controller;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.RANKING_PATH;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wooteco.team.ittabi.legenoaroundhere.dto.PageRequest;
 import wooteco.team.ittabi.legenoaroundhere.dto.PageableAssembler;
@@ -16,13 +13,12 @@ import wooteco.team.ittabi.legenoaroundhere.dto.RankingRequest;
 import wooteco.team.ittabi.legenoaroundhere.service.RankingService;
 
 @RestController
-@RequestMapping(RANKING_PATH)
 @RequiredArgsConstructor
 public class RankingController {
 
     private final RankingService rankingService;
 
-    @GetMapping
+    @GetMapping("ranking")
     public ResponseEntity<Page<PostWithCommentsCountResponse>> searchRanking(
         PageRequest pageRequest, RankingRequest rankingRequest,
         PostSearchRequest postSearchRequest) {

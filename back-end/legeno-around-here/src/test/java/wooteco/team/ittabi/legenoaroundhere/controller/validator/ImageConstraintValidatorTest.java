@@ -1,12 +1,9 @@
-
 package wooteco.team.ittabi.legenoaroundhere.controller.validator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static wooteco.team.ittabi.legenoaroundhere.controller.validator.ImageConstraintValidator.MAX_IMAGE_LENGTH;
 import static wooteco.team.ittabi.legenoaroundhere.controller.validator.ImageConstraintValidator.MAX_IMAGE_MB_VOLUME;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.IMAGES_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POSTS_PATH;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.ImageConstants.TEST_IMAGE_DIR;
 import static wooteco.team.ittabi.legenoaroundhere.utils.constants.ImageConstants.TEST_IMAGE_NAME;
 
@@ -48,7 +45,7 @@ public class ImageConstraintValidatorTest {
 
     @Test
     public void uploadPostImages_OverImagesLength_ThrownException() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.multipart(POSTS_PATH + IMAGES_PATH)
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/posts/images")
             .file("images", convertFileByteArray(TEST_IMAGE_NAME))
             .file("images", convertFileByteArray(TEST_IMAGE_NAME))
             .file("images", convertFileByteArray(TEST_IMAGE_NAME))
@@ -67,7 +64,7 @@ public class ImageConstraintValidatorTest {
 
     @Test
     public void uploadPostImages_OverImagesVolume_ThrownException() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.multipart(POSTS_PATH + IMAGES_PATH)
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/posts/images")
             .file("images", convertFileByteArray("image3_5MB.jpeg")))
             .andExpect(result -> assertThat(result.getResponse().getContentAsString(Charsets.UTF_8))
                 .contains("이미지는 " + MAX_IMAGE_MB_VOLUME + "MB를 넘을 수 없습니다!"))

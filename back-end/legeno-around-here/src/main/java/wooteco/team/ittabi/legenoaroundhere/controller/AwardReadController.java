@@ -1,10 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.controller;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.AWARDS_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.AWARDS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ME_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USERS_PATH_WITH_SLASH;
-
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +15,7 @@ public class AwardReadController {
 
     private final AwardService awardService;
 
-    @GetMapping(USERS_PATH_WITH_SLASH + "{userId}" + AWARDS_PATH)
+    @GetMapping("/users/{userId}/awards")
     public ResponseEntity<List<AwardResponse>> findAwards(@PathVariable Long userId) {
         List<AwardResponse> awards = awardService.findAwards(userId);
 
@@ -28,7 +23,7 @@ public class AwardReadController {
             .ok(awards);
     }
 
-    @GetMapping(AWARDS_PATH_WITH_SLASH + ME_PATH)
+    @GetMapping("/awards/me")
     public ResponseEntity<List<AwardResponse>> findMyAwards() {
         List<AwardResponse> awards = awardService.findMyAwards();
 

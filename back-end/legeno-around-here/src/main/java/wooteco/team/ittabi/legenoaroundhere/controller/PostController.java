@@ -1,12 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.controller;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.IMAGES_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ME_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POSTS_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POSTS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USERS_PATH_WITH_SLASH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.ZZANGS_PATH;
-
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -40,16 +33,16 @@ public class PostController {
 
     private final PostService postService;
 
-    @PostMapping(POSTS_PATH)
+    @PostMapping("/posts")
     public ResponseEntity<Void> createPost(@RequestBody PostCreateRequest postCreateRequest) {
         Long postId = postService.createPost(postCreateRequest).getId();
 
         return ResponseEntity
-            .created(URI.create(POSTS_PATH_WITH_SLASH + postId))
+            .created(URI.create("/posts/" + postId))
             .build();
     }
 
-    @GetMapping(POSTS_PATH_WITH_SLASH + "{postId}")
+    @GetMapping("/posts/{postId}")
     public ResponseEntity<PostResponse> findPost(@PathVariable Long postId) {
         PostResponse post = postService.findPost(postId);
 
@@ -58,7 +51,7 @@ public class PostController {
             .body(post);
     }
 
-    @PostMapping(POSTS_PATH + IMAGES_PATH)
+    @PostMapping("/posts/images")
     public ResponseEntity<List<PostImageResponse>> uploadPostImages(
         @ImagesConstraint List<MultipartFile> images) {
         List<PostImageResponse> postImageResponses = postService.uploadPostImages(images);
@@ -68,7 +61,7 @@ public class PostController {
             .body(postImageResponses);
     }
 
-    @PutMapping(POSTS_PATH_WITH_SLASH + "{postId}")
+    @PutMapping("/posts/{postId}")
     public ResponseEntity<PostResponse> updatePost(@PathVariable Long postId,
         @RequestBody PostUpdateRequest postUpdateRequest) {
         PostResponse postResponse = postService.updatePost(postId, postUpdateRequest);
@@ -78,7 +71,7 @@ public class PostController {
             .body(postResponse);
     }
 
-    @GetMapping(POSTS_PATH)
+    @GetMapping("/posts")
     public ResponseEntity<Page<PostWithCommentsCountResponse>> searchPosts(
         PageRequest pageRequest, PostSearchRequest postSearchRequest) {
         Page<PostWithCommentsCountResponse> posts
@@ -89,7 +82,7 @@ public class PostController {
             .body(posts);
     }
 
-    @GetMapping(POSTS_PATH + ME_PATH)
+    @GetMapping("/posts/me")
     public ResponseEntity<Page<PostWithCommentsCountResponse>> findMyPosts(
         PageRequest pageRequest) {
         Page<PostWithCommentsCountResponse> posts
@@ -101,7 +94,7 @@ public class PostController {
     }
 
 
-    @GetMapping(USERS_PATH_WITH_SLASH + "{userId}" + POSTS_PATH)
+    @GetMapping("/users/{userId}/posts")
     public ResponseEntity<Page<PostWithCommentsCountResponse>> findPosts(PageRequest pageRequest,
         @PathVariable Long userId) {
         Page<PostWithCommentsCountResponse> posts
@@ -112,7 +105,7 @@ public class PostController {
             .body(posts);
     }
 
-    @DeleteMapping(POSTS_PATH_WITH_SLASH + "{postId}")
+    @DeleteMapping("/posts/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
         postService.deletePost(postId);
 
@@ -121,7 +114,7 @@ public class PostController {
             .build();
     }
 
-    @PostMapping(POSTS_PATH_WITH_SLASH + "{postId}" + ZZANGS_PATH)
+    @PostMapping("/posts/{postId}/zzangs")
     public ResponseEntity<Void> pressPostZzang(@PathVariable Long postId) {
         postService.pressZzang(postId);
 

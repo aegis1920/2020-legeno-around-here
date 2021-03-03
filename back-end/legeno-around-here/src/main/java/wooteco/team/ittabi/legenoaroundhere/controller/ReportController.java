@@ -1,9 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.controller;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.COMMENT_REPORTS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POST_REPORTS;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.USER_REPORTS;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +19,7 @@ public class ReportController {
     private final CommentReportService commentReportService;
     private final UserReportService userReportService;
 
-    @PostMapping(POST_REPORTS)
+    @PostMapping("/post-reports")
     public ResponseEntity<Void> createPostReport(
         @RequestBody ReportCreateRequest reportCreateRequest) {
         postReportService.createPostReport(reportCreateRequest);
@@ -33,7 +29,7 @@ public class ReportController {
             .build();
     }
 
-    @PostMapping(COMMENT_REPORTS)
+    @PostMapping("/comment-reports")
     public ResponseEntity<Void> createCommentReport(
         @RequestBody ReportCreateRequest reportCreateRequest) {
         commentReportService.createCommentReport(reportCreateRequest);
@@ -43,7 +39,7 @@ public class ReportController {
             .build();
     }
 
-    @PostMapping(USER_REPORTS)
+    @PostMapping("user-reports")
     public ResponseEntity<Void> createUserReport(
         @RequestBody ReportCreateRequest reportCreateRequest) {
         userReportService.createUserReport(reportCreateRequest);

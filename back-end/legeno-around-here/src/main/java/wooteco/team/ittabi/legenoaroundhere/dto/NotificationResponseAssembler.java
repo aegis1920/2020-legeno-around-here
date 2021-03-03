@@ -1,9 +1,5 @@
 package wooteco.team.ittabi.legenoaroundhere.dto;
 
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.HOME_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.MY_PROFILE_PATH;
-import static wooteco.team.ittabi.legenoaroundhere.utils.UrlPathConstants.POSTS_PATH_WITH_SLASH;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -40,12 +36,12 @@ public class NotificationResponseAssembler {
             return makePostLocation(notification.getPost());
         }
         if (Objects.nonNull(notification.getSector()) || Objects.nonNull(notification.getUser())) {
-            return MY_PROFILE_PATH;
+            return "/users/me";
         }
-        return HOME_PATH;
+        return "/home";
     }
 
     private static String makePostLocation(Post post) {
-        return POSTS_PATH_WITH_SLASH + post.getId();
+        return "/posts/" + post.getId();
     }
 }
